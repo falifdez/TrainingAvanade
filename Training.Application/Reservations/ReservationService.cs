@@ -13,12 +13,42 @@ namespace Training.Application.Reservations
 
         private readonly IReservationRepository _reservationRepository;
 
-        public ReservationDto Get(string dni)
+        public ReservationService(IReservationRepository reservationRepository)
         {
-            return ReservationDto.GetDtoByEntity(_reservationRepository.Get(dni));
+            _reservationRepository = reservationRepository;
         }
 
+        public void Create(ReservationDto reservationDto)
+        {
+            _reservationRepository.Create(reservationDto.GetEntity());
+        }
 
+        public void Delete(Guid Id)
+        {
+            var reser = _reservationRepository.Get(Id);
+            reser.IsDeleted = true;
+            _reservationRepository.Update(reser);
+        }
 
+        public IList<ReservationDto> Get(string dni)
+        {
+            return _reservationRepository.Get(dni).Select(x => ReservationDto.GetDtoByEntity(x)).ToList();
+        }
+
+        public ReservationDto Get(Guid id)
+        {
+            return ReservationDto.GetDtoByEntity(_reservationRepository.Get(id));
+
+        }
+
+        public void Update(ReservationDto reservationDto)
+        {
+            var reser = _reservationRepository.Get(reservationDto.Id); 
+
+            reser.ExpectedDeliveryDate = reservationDto.ExpectedDeliveryDate;
+
+            _reservationRepository.Update(reser);
+
+        }
     }
 }

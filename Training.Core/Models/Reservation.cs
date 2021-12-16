@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Training.Core.Contracts;
 
 namespace Training.Core.Models
 {
-    public class Reservation 
+    public class Reservation : IRemovable
     {
         public Guid Id { get; set; }
 
@@ -18,7 +19,6 @@ namespace Training.Core.Models
 
         public Book Book { get; set; }
 
-
-
+        public bool IsDeleted { get; set ; }
     }
 }

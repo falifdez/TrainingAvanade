@@ -9,7 +9,9 @@ namespace Training.Core.Repositories
 {
     public interface IReservationRepository
     {
-        Reservation Get(string dni);
+        IList<Reservation> Get(string dni);
+
+        Reservation Get(Guid id);
 
         void Create(Reservation reservation);
 

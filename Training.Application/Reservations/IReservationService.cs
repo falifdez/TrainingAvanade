@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Training.Core.Models;
 
 namespace Training.Application.Reservations
 {
     public interface IReservationService
     {
-        ReservationDto Get(string dni);
+        IList<ReservationDto> Get(string dni);
+
+        ReservationDto Get(Guid id);
+
+        void Create(ReservationDto reservationDto);
+
+        void Update(ReservationDto reservationDto);
+
+        void Delete(Guid Id);
     }
 }

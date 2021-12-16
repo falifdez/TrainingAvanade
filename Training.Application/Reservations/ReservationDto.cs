@@ -11,6 +11,8 @@ namespace Training.Application.Reservations
 {
     public class ReservationDto
     {
+        public Guid Id { get; set; }
+
         public DateTime CreationDate { get; set; }
 
         public DateTime ExpectedDeliveryDate { get; set; }
@@ -24,6 +26,7 @@ namespace Training.Application.Reservations
         {
             return new Reservation
             {
+                Id = this.Id,
                 CreationDate = this.CreationDate,
                 ExpectedDeliveryDate = this.ExpectedDeliveryDate,
                 Book = this.BookDto.GetEntity(),
@@ -35,6 +38,7 @@ namespace Training.Application.Reservations
         {
             return new ReservationDto
             {
+                Id = reservation.Id,
                 CreationDate = reservation.CreationDate,
                 ExpectedDeliveryDate = reservation.ExpectedDeliveryDate,
                 BookDto = BookDto.GetDtoByEntity(reservation.Book),
